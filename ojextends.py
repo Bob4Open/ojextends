@@ -10,7 +10,7 @@ originType = [str,int,list,dict,tuple,float,long,bool,unicode]
 def objectToDict(self):
 	result = dict()
 	for key, value in self.__dict__.iteritems():
-		if type(value).__name__ == 'list':
+		if type(value).__name__ == 'List':
 			result[key] = map(lambda item: item.objectToDict(),value)
 		elif type(value).__name__ in customType :
 			result[key] = value.objectToDict()
@@ -19,58 +19,40 @@ def objectToDict(self):
 	return result
 
 def objectToStr(self):
-	pass
+	return str(self.objectToDict())
 
 def objectsToList(self):
-		pass
+	return map(lambda item: item.objectToDict(),self)
 
 def objectsToStr(self):
-	pass
+	return str(objectsToList(self))
 
 @classmethod
 def objectFromDict(cls, pDict):
-	# print('{} 111'.format(cls))
 	instance = cls()
-	# print('{} 222'.format(instance))
 	for key, value in pDict.iteritems():
-		# print(type(value))
 		if type(value).__name__ == 'dict' :
 			setattr(instance, key, getattr(instance,key).objectFromDict(value))
-		elif type(value).__name__ == 'list' :
-			# setattr(cls, key, )
-			# print(value[0])
-			# print('key: {}, value: {}'.format(key,value))
-			# print('clz1 {} {}'.format(instance,key))
+		elif type(value).__name__ == 'List' :
 			clz = list(getattr(instance, key))[0]
-			# print('clz {}'.format(getattr(instance, key)))
 			setattr(instance, key, clz.objectsFromList(value))
 			pass
 		else:
 			setattr(instance, key, value)
-	# print('{} key: objectFromDict'.format(cls.__name__))
 	return instance
 
 @classmethod
 def objectsFromList(cls, pList):
-	# print(cls)
-	lists = list()
-	# print(len(pList))
+	lists = List()
 	for item in pList:
 		instance = cls()
-		# print(type(item))
 		if type(item).__name__ == 'dict' :
-			# print('3333 {} {}'.format(cls, item))
 			instance = cls.objectFromDict(item)
-		elif type(item).__name__ == 'list' :
-			# setattr(cls, key, )
-			# print(value[0])
-			# print('key: {}, value: {}'.format(key,value))
+		elif type(item).__name__ == 'List' :
 			pass
 		else:
 			pass
 		lists.append(instance)
-		# 	setattr(instance, key, value)
-	# print('{} key: objectFromDict'.format(cls.__name__))
 	return lists
 
 @classmethod
@@ -78,14 +60,14 @@ def objectFromStr(cls, str):
 	result = json.loads(str)
 	if type(result).__name__ == 'dict':
 		return cls.objectFromDict(result)
-	elif type(result).__name__ == 'list':
+	elif type(result).__name__ == 'List':
 		return cls.objectsFromList(result)
 	return None
 
 @classmethod
 def objectsFromStr(cls, str):
 	result = json.loads(str)
-	if type(result).__name__ == 'list':
+	if type(result).__name__ == 'List':
 		return cls.objectsFromList(result)	
 	return None
 
@@ -106,10 +88,17 @@ def objectsFromStr(cls, str):
 def JsonSerializable(cls):
 	cls.objectToDict = objectToDict
 	cls.objectToStr = objectToStr
+
 	cls.objectFromDict = objectFromDict
-	cls.objectsFromList = objectsFromList
 	cls.objectFromStr = objectFromStr
+	
+
 	cls.objectsFromStr = objectsFromStr
+	cls.objectsFromList = objectsFromList
+
+	List.objectsToList = objectsToList
+	List.objectsToStr = objectsToStr
+
 	if not cls.__name__ in customType:
 		customType.append(cls.__name__)
 # 	# Area.objectFromDict = types.MethodType(objectFromDict,Area)
@@ -117,6 +106,9 @@ def JsonSerializable(cls):
 	
 # from array import array
 
+class List(list):
+	pass
+		
 @JsonSerializable
 class Student(object):
 	name = str
@@ -125,17 +117,17 @@ class Student(object):
 @JsonSerializable
 class Teacher(object):
 	name = str
-	students = list([Student])
+	students = List([Student])
 
 @JsonSerializable
 class School(object):
 	name = str
-	teachers = list([Teacher])
+	teachers = List([Teacher])
 
 @JsonSerializable
 class Area(object):
 	name = str
-	schools = list([School])
+	schools = List([School])
 	school = School
 	student = Student
 	# def __init__(self):
@@ -194,12 +186,14 @@ if __name__ == '__main__':
 	# areas = Area.objectsFromList(jsonlist)
 	# print(areas[0].name)
 
-	area = Area.objectFromStr(jsonstr)
+	# area = Area.objectFromStr(jsonstr)
 	# print(area.schools[0].name)
 
-	# schools = School.objectsFromStr(jsonstr)
+	schools = School.objectsFromList(jsonlist)
 	# print(schools[0].teachers[0].name)
-	print(area.objectToDict())
+	# print(type(schools).__name__)
+	# print(objectsToStr(schools))
+	print(schools.objectsToStr())
 
 	# print(json.loads(jsonstr))
 
