@@ -20,8 +20,8 @@ ojextends
 
 To install using pip, simply run
 
-```shell
-	pip install ojextends
+```code:shell
+pip install ojextends
 ```
 
 Dependencies
@@ -146,13 +146,12 @@ Tests
 -----
 Getting the tests running looks like:
 
-```shell
+```code:shell
 
-	# Install dependencies
-	$ pip install -r requirements.txt
-	# Run the test suites
-	$ python tests.py
-	
+# Install dependencies
+$ pip install -r requirements.txt
+# Run the test suites
+$ python tests.py
 ```
 License
 -------
