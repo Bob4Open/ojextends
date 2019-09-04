@@ -46,10 +46,8 @@ def get_version(package):
 
 
 def get_readme(package):
-    with codecs.open('README.rst', 'r', 'utf-8') as fd:
+    with codecs.open('README.md', 'r', 'utf-8') as fd:
         return fd.read()
-# with io.open('README.md', 'rt', encoding="utf-8") as readme_file:
-#     long_description = readme_file.read()
 
 def get_packages(package):
     """
