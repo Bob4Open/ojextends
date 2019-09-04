@@ -20,7 +20,7 @@ ojextends
 
 To install using pip, simply run
 
-```
+```shell
 pip install ojextends
 ```
 
@@ -34,7 +34,7 @@ Usage
 -----
 The code below defines some simple models, and its natural mapping to json.
 
-```
+```python
 
     from ojextends import JsonSerializable
     
@@ -62,7 +62,7 @@ The code below defines some simple models, and its natural mapping to json.
 ```
 Example of transformations to parse Area lookup response for item:
 
-```
+```python
 
     import json
     import requests
@@ -84,7 +84,7 @@ Example of transformations to parse Area lookup response for item:
 The code above produces next result:
 
 
-```
+```json
 
     {
     "name":"shenzhen",
@@ -146,12 +146,12 @@ Tests
 -----
 Getting the tests running looks like:
 
-```
+```python
 
-    # Install dependencies
-    $ pip install -r requirements.txt
-    # Run the test suites
-    $ python tests.py
+# Install dependencies
+$ pip install -r requirements.txt
+# Run the test suites
+$ python tests.py
 ```
 License
 -------
