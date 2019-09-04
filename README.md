@@ -36,7 +36,7 @@ The code below defines some simple models, and its natural mapping to json.
 
 ```
 
-    from ojextends import *
+    from ojextends import JsonSerializable
     
     @JsonSerializable
     class Student(object):
@@ -66,7 +66,7 @@ Example of transformations to parse Area lookup response for item:
 
     import json
     import requests
-    from ojextends import *
+    from ojextends import JsonSerializable
     
     def get_areas(areaid):
         url = 'https://127.0.0.1/area/lookup?id={}'
