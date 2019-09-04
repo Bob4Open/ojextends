@@ -4,7 +4,7 @@ from .ojextends import (List, JsonSerializable, objectToDict,objectToStr,objectF
 
 __name__ = 'ojextends'
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 __all__ = ['List', 'JsonSerializable', 'objectToDict','objectToStr',
 		'objectFromDict','objectFromStr','objectsFromStr',

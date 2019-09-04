@@ -158,4 +158,4 @@ License
 
 The MIT License (MIT)
 
-Contributed by `Bob Wu <https://github.com/bob4open/>`
+Contributed by [Bob Wu](https://github.com/bob4open/)
