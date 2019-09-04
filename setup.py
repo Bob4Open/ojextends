@@ -11,12 +11,12 @@ from os.path import join, exists
 
 name = 'ojextends'
 package = 'ojextends'
-description = 'JSONObjects allows you to declaratively specify how to extract and convert elements from a JSON document.'
+description = 'A lightweight library for transferring json to nested objects.'
 url = 'https://github.com/bob4open/ojextends'
 author = 'Bob Wu'
 author_email = 'bob4open@gmail.com'
 license = 'MIT'
-keywords = 'json, rest, models, orm, object'
+keywords = 'json, rest, models, object, extend'
 classifiers = [
     'Development Status :: 5 - Production/Stable',
     'Framework :: Django',

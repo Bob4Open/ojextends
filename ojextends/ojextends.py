@@ -4,15 +4,20 @@ __all__ = ['List', 'JsonSerializable', 'objectToDict','objectToStr',
 		'objectsFromList','objectsToList','objectsToStr']
 
 import json
+import six
 
-originType = (str,int,float,long,bool,list,dict,tuple,unicode,set)
+if six.PY2:
+	originType = (str,int,float,long,bool,list,dict,tuple,unicode,set)
+elif six.PY3:
+	originType = (str,int,float,bool,list,dict,tuple,set)
 
 def objectToDict(self):
 	result = dict()
-	for key, value in self.__dict__.iteritems():
+	for (key, value) in self.__dict__.items():
 		if isinstance(value, originType) :
 			if isinstance(value, list) :
-				result[key] = map(lambda item: (item if isinstance(item, originType) else item.objectToDict()), value)
+				mapObj = map(lambda item: (item if isinstance(item, originType) else item.objectToDict()), value)
+				result[key] = mapObj if six.PY2 else list(mapObj)
 			else:
 				result[key] = self.__dict__[key]
 		else :
@@ -31,7 +36,7 @@ def objectsToStr(self):
 @classmethod
 def objectFromDict(cls, pDict):
 	instance = cls()
-	for key, value in pDict.iteritems():
+	for (key, value) in pDict.items():
 		if type(value).__name__ == 'dict' :
 			setattr(instance, key, getattr(instance,key).objectFromDict(value))
 		elif type(value).__name__ == 'list' :

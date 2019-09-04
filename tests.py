@@ -25,7 +25,7 @@ class Area(object):
 	student = Student
 
 def printJson(data):
-	print json.dumps(data, indent=4, sort_keys=True)	
+	print(json.dumps(data, indent=4, sort_keys=True))	
 
 if __name__ == '__main__':
 	jsonstr = '{"name": "shenzhen","student": {"name":"Bob", "age": 20}, "schools": [{"name": "shenzhen universty", "teachers": [{"name": "Linda", "students": [{"name":"Bob", "age": 20, "books": ["book1", "book2"]},{"name":"Tom", "age": 23}]},{"name": "Mike", "students": [{"name":"Lily", "age": 18},{"name":"Stone", "age": 21}]}]},{"name": "shenzhen other universty", "teachers": [{"name": "Linda1", "students": [{"name":"Bob1", "age": 20},{"name":"Tom1", "age": 23}]},{"name": "Mike1", "students": [{"name":"Lily1", "age": 18},{"name":"Stone1", "age": 21}]}]}]}'
