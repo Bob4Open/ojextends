@@ -17,6 +17,7 @@ author = 'Bob Wu'
 author_email = 'bob4open@gmail.com'
 license = 'MIT'
 keywords = 'json, rest, models, object, extend'
+content_type="text/markdown"
 classifiers = [
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
@@ -88,7 +89,7 @@ setup(
     license=license,
     description=description,
     long_description=get_readme(package),
-    long_description_content_type="text/markdown",
+    long_description_content_type=content_type,
     author=author,
     author_email=author_email,
     packages=get_packages(package),
